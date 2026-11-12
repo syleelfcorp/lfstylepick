@@ -205,7 +205,7 @@ button { font-family: inherit; }
    상품 카드의 '신청하기'(38~42px)보다 한 단 작다. */
 .btn--sm { --h: 34px; font-size: 13px; padding: 0 18px; }
 /* 밑줄 링크 규칙(.step p a 등)이 더 구체적이라, 버튼으로 쓸 때만 되돌린다.
-   테두리는 상품 카드의 '신청하기'와 같은 블랙 라인으로 맞춘다. */
+   테두리는 제품 카드의 '신청하기'와 같은 라인으로 맞춘다(다크모드에서는 흰색). */
 .step p a.btn,
 .intro-col__more a.btn {
   text-decoration: none; font-weight: 600;
@@ -213,6 +213,22 @@ button { font-family: inherit; }
 }
 .step p a.btn:hover,
 .intro-col__more a.btn:hover { background: var(--black); color: #fff; border-color: var(--black); }
+
+/* 다크모드 — 신청하기 버튼과 동일하게 흰색 라인으로 반전한다. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .step p a.btn,
+  :root:not([data-theme="light"]) .intro-col__more a.btn { border-color: #fff; }
+  :root:not([data-theme="light"]) .step p a.btn:hover,
+  :root:not([data-theme="light"]) .intro-col__more a.btn:hover {
+    background: #fff; color: var(--bg); border-color: #fff;
+  }
+}
+:root[data-theme="dark"] .step p a.btn,
+:root[data-theme="dark"] .intro-col__more a.btn { border-color: #fff; }
+:root[data-theme="dark"] .step p a.btn:hover,
+:root[data-theme="dark"] .intro-col__more a.btn:hover {
+  background: #fff; color: var(--bg); border-color: #fff;
+}
 
 /* ---- 히어로 ---- */
 /* ---- GNB (가운데 떠 있는 글래스 pill) ---- */
@@ -684,6 +700,23 @@ div.pf__img {
 .product__view:hover { color: var(--ink); border-color: var(--ink); }
 .product__apply { color: var(--ink); border-color: var(--black); }
 .product__apply:hover { background: var(--black); color: #fff; }
+
+/* 다크모드 — --black 보더는 어두운 배경에 묻히므로 흰색으로 반전한다.
+   잠긴 버튼(closed/soon)은 --line 보더를 그대로 둬야 해서 선택자에서 제외한다. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .product:not([data-state="closed"]):not([data-state="soon"]) .product__apply {
+    border-color: #fff;
+  }
+  :root:not([data-theme="light"]) .product:not([data-state="closed"]):not([data-state="soon"]) .product__apply:hover {
+    background: #fff; color: var(--bg);
+  }
+}
+:root[data-theme="dark"] .product:not([data-state="closed"]):not([data-state="soon"]) .product__apply {
+  border-color: #fff;
+}
+:root[data-theme="dark"] .product:not([data-state="closed"]):not([data-state="soon"]) .product__apply:hover {
+  background: #fff; color: var(--bg);
+}
 
 @media (min-width: 620px) {
   .product__body { gap: 9px; }
