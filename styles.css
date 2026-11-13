@@ -323,6 +323,42 @@ button { font-family: inherit; }
   object-fit: cover;        /* 비율이 다른 사진은 가운데 기준으로 잘라 채운다 */
   background: var(--surface);
 }
+/* ---- 히어로 필기체 장식 ---- */
+/* Ephesis (SIL OFL) 를 레포에 직접 담아 쓴다 — 외부 폰트 도메인을 추가하지 않는다. */
+@font-face {
+  font-family: "Ephesis";
+  src: url("fonts/ephesis-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF;
+}
+/* 사진 안에 두어 화면 높이에 따른 scale 을 그대로 따라가게 한다. */
+.hero-script {
+  position: absolute;
+  left: var(--hs-x, 53%);
+  top: var(--hs-y, 60%);
+  font-family: "Ephesis", cursive;
+  font-size: var(--hs-size, 100px);
+  line-height: 1;
+  color: var(--key);
+  white-space: nowrap;
+  rotate: -9deg;
+  transform-origin: left center;
+  pointer-events: none;
+  z-index: 2;
+  /* 왼쪽에서 오른쪽으로 드러나 손으로 쓰는 것처럼 보이게 한다.
+     글자가 기울어져 있어 드러나는 방향도 함께 기울어진다. */
+  animation: hero-write 1.15s cubic-bezier(.33,.9,.4,1) var(--hs-delay, 2.3s) both;
+}
+@keyframes hero-write {
+  from { clip-path: inset(-25% 100% -25% 0); }
+  to   { clip-path: inset(-25% -12% -25% 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-script { animation: none; clip-path: none; }
+}
+
 /* 번호 표시는 사진이 오기 전의 빈 자리(div)에만 적용된다 */
 div.pf__img {
   display: grid; place-items: center;
@@ -490,6 +526,8 @@ div.pf__img {
      폭에 맞춰 줄어들게 한다(383px 이상에서는 36px 그대로). */
   .hero h1 { font-size: min(36px, 9.4vw); line-height: 1.3; }
   .hero__sub { font-size: 16px; margin-top: 12px; }
+  /* 모바일 스택은 1.8초에 멈추므로 필기도 더 일찍 시작한다. 카드가 작아 글자도 줄인다. */
+  .hero-script { --hs-size: 66px; --hs-delay: 1.95s; --hs-x: 51%; --hs-y: 62%; }
 
   /* ---- 모바일 가운데 정렬 ----
      화면이 좁을 때는 가운데로 모아야 줄이 들쭉날쭉해 보이지 않는다. */
