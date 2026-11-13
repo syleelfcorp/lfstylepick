@@ -19,9 +19,10 @@
 
   --bg: #ffffff;
   --surface: #faf8fd;      /* 섹션 면 */
-  --surface-pick: #f3edfc; /* 제품 리스트 전용 면 */
+  --surface-pick: #f7f2ff; /* 제품 리스트 전용 면 */
   --card: #ffffff;
-  --line: #e8e4f0;         /* 기본 보더 */
+  --line: #d5cde5;         /* 기본 보더 */
+  --line-soft: #e8e4f0;    /* 푸터 구분선 등 더 연한 보더 */
 
   --ok: #1f9d6b;           /* 완료/성공 */
   --warn: #c24a00;         /* 유의 */
@@ -71,6 +72,7 @@
     --surface-pick: #1c1430;
     --card: #191322;
     --line: #2a2338;
+    --line-soft: #2a2338;
 
     --ok: #4fd39d;
     --warn: #ff9a52;
@@ -103,6 +105,7 @@
   --surface-pick: #1c1430;
   --card: #191322;
   --line: #2a2338;
+  --line-soft: #2a2338;
 
   --ok: #4fd39d;
   --warn: #ff9a52;
@@ -520,8 +523,6 @@ div.pf__img {
     left: 50%; translate: -50% 0;
     top: auto; bottom: 9px;
     width: 1px; height: 18px;
-    /* --line(#e8e4f0)은 섹션 배경(#faf8fd)과 거의 같아 보이지 않는다.
-       키컬러를 50% 섞어 연보라 선으로 띄운다. 진하게 하려면 숫자를 올리면 된다. */
     background: color-mix(in srgb, var(--key) 30%, transparent);
   }
 }
@@ -583,10 +584,10 @@ div.pf__img {
   position: relative;
   padding: 0 0 clamp(26px, 3.2vw, 34px) 26px;
 }
-.timeline__item::before {            /* 점 */
+.timeline__item::before {            /* 점 — 선과 같은 색으로 꽉 채운다 */
   content: ''; position: absolute; left: 0; top: 5px;
   width: 11px; height: 11px; border-radius: 50%;
-  background: var(--bg); border: 2px solid var(--ink);
+  background: var(--line); border: 0;
 }
 .timeline__item::after {             /* 이어지는 선 */
   content: ''; position: absolute; left: 5px; top: 19px; bottom: 0;
@@ -625,7 +626,7 @@ div.pf__img {
   }
   .timeline::before {
     content: ''; position: absolute;
-    left: 7px; right: 7px; top: 7px;      /* 첫 점 중심 ~ 끝 점 중심 */
+    left: 5.5px; right: 5.5px; top: 5px;  /* 점 중심(5.5px)에 선 중심을 맞춘다 */
     height: 1px; background: var(--line);
   }
   .timeline__item { flex: 1; padding: 30px 28px 0 0; }
@@ -789,7 +790,7 @@ div.pf__img {
 @media (prefers-reduced-motion: reduce) { .faq__icon .v { transition: none; } }
 
 /* ---- 푸터 ---- */
-.site-footer { background: var(--bg); border-top: 1px solid var(--line); }
+.site-footer { background: var(--bg); border-top: 1px solid var(--line-soft); }
 .site-footer__inner { padding-block: 34px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: space-between; }
 .site-footer small { color: var(--muted); font-size: 13px; }
 .site-footer__brand { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
