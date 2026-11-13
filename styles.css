@@ -340,7 +340,7 @@ div.pf__img {
    가로로 늘어놓고 음수 마진으로 서로 겹친다. 가운데(3)가 맨 앞이다. */
 .hero__fan {
   display: none;
-  position: absolute; left: 0; right: 0; bottom: calc(-10% + 2px);
+  position: absolute; left: 0; right: 0; bottom: calc(-5% + 2px);
   justify-content: center; align-items: flex-end;
   z-index: 2;
   /* 판 자체는 클릭을 통과시키고, 카드만 집히게 둔다.
