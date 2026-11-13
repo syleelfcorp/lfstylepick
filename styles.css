@@ -502,6 +502,10 @@ div.pf__img {
      화면이 좁을 때는 가운데로 모아야 줄이 들쭉날쭉해 보이지 않는다. */
   .sub-title { text-align: center; }     /* '참여 방법', '진행 일정' */
   .intro-col { text-align: center; }     /* 서비스 소개 두 칼럼 */
+  .intro-col p { font-size: 14px; }
+  /* 두 칼럼이 세로로 쌓이므로, 이 gap 이 곧
+     ‘엘스파 소개 보러가기’ 버튼과 ‘엘스파 프리뷰’ 제목 사이 간격이 된다. */
+  .intro-grid { gap: 48px; }
   .step { text-align: center; }          /* 참여 방법 카드 */
   /* 아이콘도 가운데로.
      .step__ico 는 display:block 이라 가로를 꽉 채워서 auto 마진이 듣지 않는다.
@@ -751,7 +755,7 @@ div.pf__img {
 /* 위 간격만 따로 키운다 — .mt-lg 를 건드리면 진행 일정 제목과
    수령 후 안내 페이지의 유의사항까지 같이 벌어진다 */
 .notice--center.mt-lg { margin-top: clamp(38px, 6.8vw, 60px); }
-.notice--center h3 { display: block; margin: 0; font-size: 14px; font-weight: 500; }
+.notice--center h3 { display: block; margin: 0; font-size: 14px; font-weight: 500; color: var(--muted); }
 .notice--center ul { padding-left: 0; list-style: none; gap: 4px; margin-top: 14px; }
 .notice__q {
   display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -775,6 +779,9 @@ div.pf__img {
   line-height: 1.5; cursor: pointer; list-style: none;
 }
 .faq__q::-webkit-details-marker { display: none; }
+/* 질문 앞 Q. — 텍스트 span 안에 두어 첫 줄에 붙고 줄바꿈도 따라간다 */
+.faq__text { min-width: 0; }
+.faq__text::before { content: "Q."; color: var(--key); margin-right: 7px; }
 /* 키보드 이동일 때만 — 마우스 클릭 후에는 색이 남지 않는다 */
 .faq__q:focus-visible { color: var(--key); }
 .faq__icon { flex-shrink: 0; width: 22px; height: 22px; color: var(--muted); }
