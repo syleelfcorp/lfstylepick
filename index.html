@@ -470,8 +470,17 @@
       cleanup();
     };
 
+    /* 유입 채널 — 이미 보내는 집계 요청에 얹는다. 요청 수는 늘지 않는다.
+       영문/숫자 20자까지만 통과시키고, 실제 허용 목록 검사는 서버에서 한다. */
+    var ch = '';
+    try {
+      var m = /[?&]ch=([A-Za-z0-9_-]{1,20})(?:&|$)/.exec(location.search);
+      if (m) ch = m[1].toLowerCase();
+    } catch (e) {}
+
     tag = document.createElement('script');
-    tag.src = COUNTS_URL + '?action=counts&callback=' + cbName;
+    tag.src = COUNTS_URL + '?action=counts&callback=' + cbName
+            + (ch ? '&ch=' + encodeURIComponent(ch) : '');
     tag.onerror = cleanup;
     document.head.appendChild(tag);
   })();
