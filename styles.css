@@ -1214,3 +1214,8 @@ body.no-scroll { overflow: hidden; }
 }
 .form-closed__home { margin: 24px 0 0; font-size: 14px; }
 .form-closed__home a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+
+/* 신청서 엘스파 게이트 — 승인 전에도 신청 가능하다는 점이 가장 중요하다.
+   안내문에서 이 한 줄만 눈에 들어오게 한다. */
+.gate__ok { color: var(--ink); font-weight: 700; }
+#lespaGate .hint, #lespaGate .gate__note { word-break: keep-all; }

@@ -52,15 +52,18 @@
 
         <!-- ============ 엘스파 회원 확인 ============ -->
         <div class="field gate" id="lespaGate">
-          <label>엘스파 회원 확인 <span class="req" aria-hidden="true">*</span></label>
-          <span class="hint">엘스파 프리뷰는 엘스파(LF 스타일 파트너) 회원만 신청할 수 있습니다.</span>
+          <label>엘스파 가입 확인 <span class="req" aria-hidden="true">*</span></label>
+          <!-- 엘스파 승인과 프리뷰 선정을 함께 검토하므로 승인 전에도 신청할 수 있다.
+               체크박스 문구만 보고 판단하는 사람이 많아, 조건을 체크박스 자체에 담았다. -->
+          <span class="hint">엘스파 프리뷰는 엘스파(LF 스타일 파트너) 회원을 대상으로 합니다.<br>
+            <b class="gate__ok">승인을 기다리는 중이어도 신청하실 수 있습니다.</b></span>
 
           <div class="gate__check" id="lespaBox">
             <input type="checkbox" id="lespaMember" name="lespaMember" value="Y">
-            <label for="lespaMember">엘스파 회원입니다.</label>
+            <label for="lespaMember">엘스파에 가입했거나, 가입 신청을 완료했습니다.</label>
             <p class="gate__note">
-              아직 회원이 아니라면 먼저 가입하신 뒤 신청해 주세요.
-              <a id="lespaJoinLink" href="#" target="_blank" rel="noopener">엘스파 가입하기</a>
+              아직이라면 먼저 가입 신청해 주세요.
+              <a id="lespaJoinLink" href="#" target="_blank" rel="noopener">엘스파 가입 신청하기</a>
             </p>
           </div>
         </div>
