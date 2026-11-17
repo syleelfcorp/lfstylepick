@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>엘스파 프리뷰 모집</title>
 <meta name="description" content="LFmall 엘스파 파트너를 위한 제품 지원 프로그램 엘스파 프리뷰. 원하는 아이템을 무료로 받고 후기와 링크 공유로 추가 수익까지!">
+<!-- 검색엔진이 하나의 주소로 모아 보게 한다. www · /index.html 로 들어와도 여기로 합쳐진다. -->
+<link rel="canonical" href="https://lfstylepick.com/">
 <!-- 공유 시 표시되는 미리보기(카카오톡·페이스북 공통) -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="LFmall 엘스파 프리뷰">
@@ -20,6 +22,120 @@
       crossorigin="anonymous">
 <link rel="stylesheet" href="styles.css">
 <script>document.documentElement.classList.add('js');</script>
+
+<!-- 구조화 데이터 — 검색엔진과 AI 가 이 페이지가 무엇인지 읽어가는 부분.
+     아래 FAQ 는 페이지 본문의 자주 묻는 질문과 글자가 같아야 한다.
+     본문을 고치면 여기도 같이 고친다. 내용이 어긋나면 검색에서 불이익을 받는다. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://lfstylepick.com/#organization",
+      "name": "LF 스타일 파트너",
+      "alternateName": "엘스파",
+      "url": "https://lfstylepick.com/",
+      "description": "나만의 패션 취향을 컨텐츠로 공유하고, 추천을 통해 매월 수익을 창출하는 LF 공식 크리에이터 파트너십입니다.",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "LF"
+      },
+      "email": "lfstylepartner@lfcorp.com",
+      "sameAs": [
+        "https://www.instagram.com/lfmall_stylepartner/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://lfstylepick.com/#website",
+      "url": "https://lfstylepick.com/",
+      "name": "엘스파 프리뷰",
+      "inLanguage": "ko-KR",
+      "publisher": {
+        "@id": "https://lfstylepick.com/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://lfstylepick.com/#webpage",
+      "url": "https://lfstylepick.com/",
+      "name": "엘스파 프리뷰 모집",
+      "description": "LFmall 엘스파 파트너를 위한 제품 지원 프로그램 엘스파 프리뷰. 원하는 아이템을 무료로 받고 후기와 링크 공유로 추가 수익까지!",
+      "inLanguage": "ko-KR",
+      "isPartOf": {
+        "@id": "https://lfstylepick.com/#website"
+      },
+      "about": {
+        "@id": "https://lfstylepick.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://lfstylepick.com/img/og.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://lfstylepick.com/#faq",
+      "isPartOf": {
+        "@id": "https://lfstylepick.com/#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "엘스파 프리뷰에서 제공하는 착장 제품은 정말 무료인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네, 제품 가격과 배송비 모두 받지 않습니다. 대신 11.30 (월)부터 12.04 (금)까지 개인 SNS에 릴스 또는 피드 1건, LFmall 나의 패션 클럽에 착장컷 1건을 올려주셔야 하며, 크리에이터 시스템에서 생성한 제품 링크를 개인 SNS에 공유해 주셔야 합니다. 공유된 링크에서 제품 구매가 발생할 경우 결제 금액의 5%가 수수료로 지급됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "선정 결과는 어떻게 알 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "엘스파 가입 페이지에 SNS 아이디로 DM을 보내거나 휴대폰 문자로 개별 안내드립니다. 전체 공지는 따로 하지 않으니 연락처를 정확히 적어주세요. 모르는 사람의 메시지를 차단해 두셨다면 안내가 전달되지 않을 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "여러 제품에 동시에 신청할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "1인당 1개 제품만 신청하실 수 있습니다. 여러 번 신청하신 경우 가장 먼저 접수된 신청만 유효하며, 이후 신청은 접수되지 않습니다. 신청 내용을 변경하셔야 한다면 문의 채널로 알려주세요. 문의: 인스타그램 @lfmall_stylepartner / 메일 lfstylepartner@lfcorp.com"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "사이즈가 맞지 않으면 교환할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "보내드린 제품은 교환과 반품이 어렵습니다. 신청하실 때 사이즈를 한 번 더 확인해 주세요."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "후기에 꼭 얼굴이 나와야 하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "아니요. 얼굴 노출은 자유롭게 선택하실 수 있습니다. 다만 제품과 코디, 핏이 잘 보이도록만 찍어주시면 충분합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "기한 내에 후기를 올리지 못하면 어떻게 되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "다음 시즌 엘스파 프리뷰 선정 및 엘스파 활동에서 제외될 수 있습니다. 사정이 생기셨다면 안내받으신 연락처로 미리 알려주세요."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 

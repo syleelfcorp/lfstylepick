@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 검색엔진에 알릴 페이지는 홈 하나뿐이다.
+     신청서(apply) · 신청완료(complete) · 수령 후 안내(guide)는 noindex 라 넣지 않는다.
+     시즌이 바뀌어 내용을 고치면 lastmod 날짜도 함께 고친다. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://lfstylepick.com/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

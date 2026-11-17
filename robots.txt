@@ -1,0 +1,12 @@
+# 엘스파 프리뷰 — https://lfstylepick.com
+#
+# 공개 페이지만 있는 사이트라 Disallow 를 두지 않는다.
+# 숨기고 싶은 경로를 Disallow 에 적으면 크롤러는 막지만 사람에게는 그 경로를
+# 알려주는 꼴이 되고, 보안성 검사에서 '정보 노출'로 지적된다.
+# 검색에서 빼야 하는 페이지는 각 HTML 의 <meta name="robots" content="noindex"> 로 처리한다.
+# Disallow 와 noindex 를 같이 쓰면 크롤러가 페이지를 못 읽어 noindex 를 보지도 못한다.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://lfstylepick.com/sitemap.xml
