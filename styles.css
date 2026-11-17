@@ -1197,10 +1197,10 @@ body.no-scroll { overflow: hidden; }
 /* ═══ 신청서 — 모집 기간이 아닐 때 ═══════════════════════════════════
    apply.html 의 <head> 스크립트가 html 에 data-season 을 붙인다.
    open 이 아니면 폼을 감추고 안내를 대신 보여준다. */
+/* 테두리와 그림자 없이 여백으로만 구분한다. */
 .form-closed {
   display: none; text-align: center;
-  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-  box-shadow: var(--shadow); padding: clamp(40px, 7vw, 56px) clamp(20px, 5vw, 40px);
+  padding: clamp(40px, 7vw, 56px) clamp(20px, 5vw, 40px);
 }
 :root[data-season="closed"] .form-card,
 :root[data-season="soon"] .form-card { display: none; }
