@@ -797,7 +797,7 @@ div.pf__img {
 }
 .faq__q::-webkit-details-marker { display: none; }
 /* 질문 앞 Q. — 텍스트 span 안에 두어 첫 줄에 붙고 줄바꿈도 따라간다 */
-.faq__text { min-width: 0; }
+.faq__text { min-width: 0; word-break: keep-all; }   /* 한글이 단어 중간에서 끊기지 않게 */
 .faq__text::before { content: "Q."; color: var(--key); margin-right: 7px; }
 /* 키보드 이동일 때만 — 마우스 클릭 후에는 색이 남지 않는다 */
 .faq__q:focus-visible { color: var(--key); }
@@ -807,8 +807,10 @@ div.pf__img {
 .faq__item[open] .faq__icon .v { opacity: 0; transform: rotate(90deg); }
 .faq__a {
   padding: 0 clamp(20px, 2.4vw, 28px) clamp(22px, 2.4vw, 28px);
-  color: var(--muted); font-size: 14.5px; line-height: 1.75;
+  color: var(--muted); font-size: 14.5px; line-height: 1.75; word-break: keep-all;
 }
+/* 답변 본문 안의 링크 — .step p a 와 같은 방식 */
+.faq__a a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .faq__a p { margin: 0 0 2px; }
 .faq__a p:last-child { margin: 0; }
 @media (prefers-reduced-motion: reduce) { .faq__icon .v { transition: none; } }
