@@ -13,6 +13,23 @@
       integrity="sha384-ei/b2Mz3F5J8nqTvpKS89CkzDCuD7Cc+/F+OsaPUKItzHgLNKnGq3rjtYq/B7RnO"
       crossorigin="anonymous">
 <link rel="stylesheet" href="styles.css">
+
+<script>
+  /* ── 모집 기간 ───────────────────────────────────────────────────
+     index.html 제품 카드의 data-start / data-end 와 같은 값이어야 한다.
+     시즌이 바뀌면 (1) 여기 두 줄 (2) index.html 의 카드 날짜
+     (3) Apps Script 의 SEASON_START / SEASON_END 를 함께 고친다. */
+  var SEASON_START = '2026-11-13T17:00';
+  var SEASON_END   = '2026-11-20T17:00';
+
+  /* 폼이 잠깐 보였다 사라지지 않도록 화면을 그리기 전에 상태를 정한다. */
+  (function () {
+    function t(v) { return new Date(v + ':00+09:00').getTime(); }
+    var now = Date.now();
+    document.documentElement.dataset.season =
+      now < t(SEASON_START) ? 'soon' : (now < t(SEASON_END) ? 'open' : 'closed');
+  })();
+</script>
 </head>
 <body>
 
@@ -197,6 +214,15 @@
         </div>
       </form>
     </div>
+
+    <!-- 모집 기간이 아닐 때 폼 대신 보이는 자리. 기간 판정은 <head> 의 스크립트가 한다. -->
+    <div class="form-closed">
+      <p class="form-closed__lead" id="closedLead">모집이 종료되었습니다.</p>
+      <p class="form-closed__body">엘스파 프리뷰는 LF 스타일 파트너만 신청할 수 있어요.<br>
+        미리 가입해 두시면 다음 시즌에 바로 참여하실 수 있습니다!</p>
+      <a class="btn btn--key" id="closedJoin" href="#" target="_blank" rel="noopener">엘스파 가입 신청하기</a>
+      <p class="form-closed__home"><a href="index.html">홈으로 돌아가기</a></p>
+    </div>
   </div>
 </main>
 
@@ -340,6 +366,25 @@
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbxGee0iHmdbZuvI6rE3rviQ5s3urWQwZ4cnYqjwSvAl-XkvoQYGpvFjUTM3L1u9BnuD2Q/exec';
 
   var LESPA_JOIN_URL = 'https://affiliator.lfmall.co.kr/aff_join/index.html';
+
+  function seasonState() {
+    function t(v) { return new Date(v + ':00+09:00').getTime(); }
+    var now = Date.now();
+    return now < t(SEASON_START) ? 'soon' : (now < t(SEASON_END) ? 'open' : 'closed');
+  }
+
+  /* 모집 기간이 아니면 폼 대신 안내를 보여준다(보이고 숨기는 것은 CSS).
+     폼을 열어둔 채 마감을 넘기는 경우가 있어 30초마다 다시 확인한다. */
+  function applySeasonGate() {
+    var state = seasonState();
+    document.documentElement.dataset.season = state;
+    if (state === 'open') return;
+    document.getElementById('closedLead').textContent =
+      (state === 'soon') ? '아직 모집 시작 전입니다.' : '모집이 종료되었습니다.';
+    document.getElementById('closedJoin').href = LESPA_JOIN_URL;
+  }
+  applySeasonGate();
+  setInterval(applySeasonGate, 30000);
 
   var applyFormEl = document.getElementById('applyForm');
   var gateEl      = document.getElementById('lespaGate');
@@ -586,6 +631,9 @@
     function goComplete() {
       location.href = 'complete.html?product=' + encodeURIComponent(data.productName || '');
     }
+
+    /* 폼을 열어둔 채 마감을 넘긴 경우 — 보내지 않고 안내로 바꾼다. */
+    if (seasonState() !== 'open') { applySeasonGate(); window.scrollTo(0, 0); return; }
 
     if (!ENDPOINT) { goComplete(); return; }
 

@@ -1193,3 +1193,24 @@ body.no-scroll { overflow: hidden; }
   :root[data-season="closed"] .product-grid { grid-template-columns: repeat(4, 1fr); gap: 34px 16px; }
   :root[data-season="closed"] .product__name { font-size: 15px; }
 }
+
+/* ═══ 신청서 — 모집 기간이 아닐 때 ═══════════════════════════════════
+   apply.html 의 <head> 스크립트가 html 에 data-season 을 붙인다.
+   open 이 아니면 폼을 감추고 안내를 대신 보여준다. */
+.form-closed {
+  display: none; text-align: center;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: clamp(40px, 7vw, 56px) clamp(20px, 5vw, 40px);
+}
+:root[data-season="closed"] .form-card,
+:root[data-season="soon"] .form-card { display: none; }
+:root[data-season="closed"] .form-closed,
+:root[data-season="soon"] .form-closed { display: block; }
+
+.form-closed__lead { margin: 0 0 12px; font-size: 20px; font-weight: 700; color: var(--ink); }
+.form-closed__body {
+  margin: 0 auto 26px; max-width: 420px;
+  font-size: 15px; line-height: 1.7; color: var(--muted); word-break: keep-all;
+}
+.form-closed__home { margin: 24px 0 0; font-size: 14px; }
+.form-closed__home a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
