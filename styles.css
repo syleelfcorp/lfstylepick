@@ -1158,3 +1158,38 @@ body.no-scroll { overflow: hidden; }
 .stack-sm { display: grid; gap: 10px; }
 .mt-lg { margin-top: clamp(28px, 5vw, 44px); }
 .divider { height: 1px; background: var(--line); border: 0; margin-block: clamp(40px, 7vw, 64px); }
+
+/* ═══ 시즌 종료 ═══════════════════════════════════════════════════════
+   카드의 마지막 마감 시각이 지나면 html 에 data-season="closed" 가 붙는다.
+   히어로는 그대로 두고 제품 섹션만 '다음 시즌 안내'로 바뀐다.
+   지난 상품은 뿌옇게, 버튼은 감추고, 기간 자리에는 '모집 종료'만 남는다. */
+
+.season-next { display: none; text-align: center; padding: 2px 0 70px; }
+:root[data-season="closed"] .season-next { display: block; }
+.season-next__lead {
+  margin: 0 0 10px; font-size: 18px; font-weight: 700; color: var(--ink);
+}
+/* 두 문장을 <br> 로 나눈다. 문장 경계라 임의의 줄바꿈이 아니고,
+   좁은 화면에서는 각 문장이 keep-all 로 자연스럽게 다시 접힌다. */
+.season-next__body {
+  margin: 0 auto 26px; max-width: 470px;
+  font-size: 15px; line-height: 1.7; color: var(--muted); word-break: keep-all;
+}
+@media (min-width: 620px) { .season-next__lead { font-size: 20px; } }
+
+/* 지난 상품 — 영역을 줄이고 신청 수와 버튼을 감춘다.
+   썸네일이 흐려지는 것은 .product[data-state="closed"] 규칙이 이미 처리한다. */
+:root[data-season="closed"] .product-grid { grid-template-columns: repeat(3, 1fr); gap: 22px 12px; }
+:root[data-season="closed"] .product__cat,
+:root[data-season="closed"] .product__stat,
+:root[data-season="closed"] .product__actions { display: none; }
+:root[data-season="closed"] .product__body { padding-top: 10px; gap: 3px; }
+:root[data-season="closed"] .product__name { font-size: 12.5px; word-break: keep-all; }
+:root[data-season="closed"] .product__deadline { margin: 0; font-size: 11.5px; }
+:root[data-season="closed"] .product:hover { transform: none; }
+
+@media (min-width: 620px) {
+  /* 모바일 3열, 그 위로는 4열. 카드가 커지므로 제품명도 기본 크기로 되돌린다. */
+  :root[data-season="closed"] .product-grid { grid-template-columns: repeat(4, 1fr); gap: 34px 16px; }
+  :root[data-season="closed"] .product__name { font-size: 15px; }
+}

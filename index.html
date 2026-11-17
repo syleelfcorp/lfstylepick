@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>엘스파 프리뷰 모집</title>
+<title>엘스파 프리뷰 | LF 스타일 파트너 제품 지원 프로그램</title>
 <meta name="description" content="LFmall 엘스파 파트너를 위한 제품 지원 프로그램 엘스파 프리뷰. 원하는 아이템을 무료로 받고 후기와 링크 공유로 추가 수익까지!">
 <!-- 검색엔진이 하나의 주소로 모아 보게 한다. www · /index.html 로 들어와도 여기로 합쳐진다. -->
 <link rel="canonical" href="https://lfstylepick.com/">
@@ -60,7 +60,7 @@
       "@type": "WebPage",
       "@id": "https://lfstylepick.com/#webpage",
       "url": "https://lfstylepick.com/",
-      "name": "엘스파 프리뷰 모집",
+      "name": "엘스파 프리뷰 | LF 스타일 파트너 제품 지원 프로그램",
       "description": "LFmall 엘스파 파트너를 위한 제품 지원 프로그램 엘스파 프리뷰. 원하는 아이템을 무료로 받고 후기와 링크 공유로 추가 수익까지!",
       "inLanguage": "ko-KR",
       "isPartOf": {
@@ -229,6 +229,16 @@
   <div class="wrap" data-speed="0.07">
     <div class="section-head center">
       <h2 class="section-title reveal">제품 리스트</h2>
+    </div>
+
+    <!-- 모집이 끝나면(html[data-season="closed"]) 제품 목록 위에 보인다.
+         다음 시즌 알림을 약속하지 않고, 신청 자격이 엘스파 파트너라는 사실로 안내한다. -->
+    <div class="season-next">
+      <p class="season-next__lead">지금은 상품을 준비중 입니다.</p>
+      <p class="season-next__body">엘스파 프리뷰는 LF 스타일 파트너만 신청할 수 있어요.<br>
+        미리 가입해 두시면 다음 시즌에 바로 참여하실 수 있습니다!</p>
+      <a class="btn btn--key" href="https://affiliator.lfmall.co.kr/aff_join/index.html"
+         target="_blank" rel="noopener">엘스파 가입 신청하기</a>
     </div>
 
     <div class="product-grid reveal" data-delay="1">
@@ -699,6 +709,18 @@
     }
 
     var cards = document.querySelectorAll('.product[data-end]');
+    var root = document.documentElement;
+
+    /* true 로 두면 모집이 끝난 뒤의 화면을 미리 볼 수 있다. 확인 후 false 로 되돌릴 것. */
+    var FORCE_SEASON_CLOSED = false;
+
+    /* 시즌 종료 = 카드들의 마감 시각 중 가장 늦은 것.
+       시즌이 바뀌어도 카드의 data-end 만 고치면 따라오므로 여기는 손댈 필요가 없다. */
+    var seasonEnd = 0;
+    Array.prototype.forEach.call(cards, function (c) {
+      var e = kst(c.dataset.end);
+      if (e > seasonEnd) seasonEnd = e;
+    });
 
     function render() {
       var now = Date.now();
@@ -712,7 +734,11 @@
         var start = card.dataset.start ? kst(card.dataset.start) : null;
         var state, html;
 
-        if (FORCE_OPEN_ALL || card.dataset.force === 'open') {
+        if (FORCE_SEASON_CLOSED) {
+          /* 미리보기용 — 실제 마감 후와 같은 상태로 보여준다 */
+          state = 'closed';
+          html = '모집 종료';
+        } else if (FORCE_OPEN_ALL || card.dataset.force === 'open') {
 
           state = 'open';
           html = label(card.dataset.end) + '까지 · <b>' + gap(now, end) + ' 남음</b>';
@@ -742,6 +768,10 @@
           btn.setAttribute('aria-disabled', 'true');
         }
       });
+
+      /* 모집이 모두 끝나면 제품 섹션이 '다음 시즌 안내'로 바뀐다(스타일은 CSS). */
+      root.dataset.season = (FORCE_SEASON_CLOSED ||
+        (!FORCE_OPEN_ALL && seasonEnd && now >= seasonEnd)) ? 'closed' : 'open';
     }
 
     render();
