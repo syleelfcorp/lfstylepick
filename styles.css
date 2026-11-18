@@ -995,25 +995,35 @@ body.no-scroll { overflow: hidden; }
 .input-prefix.no-prefix .input { padding-left: 15px; }
 
 /* ============================================================
-   엘스파 회원 확인 — 신청 자격 관문
-   체크하기 전에는 아래 항목이 모두 잠긴다.
+   엘스파 가입 상태 — 신청 자격 관문
+   선택 카드 3장. '아직 가입하지 않았습니다'를 고르면
+   아래 항목이 모두 잠기고 가입 안내만 보인다.
    ============================================================ */
-.gate__check {
-  display: grid; grid-template-columns: 18px 1fr; gap: 10px 12px; align-items: start;
-  padding: 16px; border: 1.5px solid var(--line); border-radius: var(--radius-sm);
-  background: var(--surface);
+.gate__opts { display: grid; gap: 8px; }
+.gate__opt { position: relative; }
+.gate__opt input {
+  position: absolute; top: 18px; left: 16px;
+  width: 18px; height: 18px; margin: 0; accent-color: var(--key);
+}
+.gate__opt label {
+  display: block; padding: 16px 16px 16px 46px;
+  border: 1.5px solid var(--line); border-radius: var(--radius-sm);
+  background: var(--surface); cursor: pointer;
+  font-size: 14.5px; font-weight: 600; line-height: 1.5; color: var(--ink);
+  word-break: keep-all;
   transition: border-color .15s ease, background-color .15s ease;
 }
-.gate__check input[type="checkbox"] {
-  width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--key); flex-shrink: 0;
+.gate__opt input:checked + label {
+  border-color: var(--key-line); background: var(--key-soft); font-weight: 700;
 }
-.gate__check > label {
-  font-size: 14.5px; font-weight: 700; color: var(--ink); line-height: 1.5; cursor: pointer;
+.gate__opt input:focus-visible + label { outline: 3px solid var(--key); outline-offset: 2px; }
+@media (hover: hover) {
+  .gate__opt input:not(:checked) + label:hover { border-color: var(--key-line); }
 }
-.gate__check.is-on { border-color: var(--key-line); background: var(--key-soft); }
 
+/* 가입 안내 — .field 가 1열 그리드라 첫 칸에 둔다 */
 .gate__note {
-  grid-column: 2; margin: 0;
+  grid-column: 1; margin: 2px 0 0;
   font-size: 13px; line-height: 1.6; color: var(--muted);
 }
 .gate__note a {
