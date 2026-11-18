@@ -242,9 +242,11 @@
     <!-- 모집이 끝나면(html[data-season="closed"]) 제품 목록 위에 보인다.
          다음 시즌 알림을 약속하지 않고, 신청 자격이 엘스파 파트너라는 사실로 안내한다. -->
     <div class="season-next">
-      <p class="season-next__lead">지금은 상품을 준비중 입니다.</p>
-      <p class="season-next__body">엘스파 프리뷰는 LF 스타일 파트너만 신청할 수 있어요.<br>
-        미리 가입해 두시면 다음 시즌에 바로 참여하실 수 있습니다!</p>
+      <!-- 문장은 아래 스크립트의 NEXT_OPEN_TEXT 가 덮어쓴다.
+           오픈일이 지나면 여기 적힌 기본 문장으로 돌아간다. -->
+      <p class="season-next__lead" id="seasonNextLead">지금은 상품을 준비중 입니다.</p>
+      <p class="season-next__body">엘스파 프리뷰는 LF 스타일 파트너만 신청할 수 있어요<br>
+        미리 가입해 두시면 오픈 당일 바로 참여할 수 있어요!</p>
       <a class="btn btn--key" href="https://affiliator.lfmall.co.kr/aff_join/index.html"
          target="_blank" rel="noopener">엘스파 가입 신청하기</a>
     </div>
@@ -735,6 +737,14 @@
     /* true 로 두면 모집이 끝난 뒤의 화면을 미리 볼 수 있다. 확인 후 false 로 되돌릴 것. */
     var FORCE_SEASON_CLOSED = false;
 
+    /* ── 다음 시즌 오픈 안내 ────────────────────────────────────────
+       NEXT_OPEN 이 지나면 날짜 문장을 버리고 기본 문장으로 돌아간다.
+       오픈일에 사이트를 늦게 고쳐도 지난 날짜를 약속하지 않게 하려는 장치다.
+       다음 시즌 날짜가 정해지면 아래 두 줄만 고치면 되고,
+       아직 모르면 NEXT_OPEN 을 '' 로 두면 날짜 문장이 나오지 않는다. */
+    var NEXT_OPEN      = '2026-11-30T23:59';
+    var NEXT_OPEN_TEXT = '다음 모집은 11월 30일(월)에 열려요!';
+
     /* 시즌 종료 = 카드들의 마감 시각 중 가장 늦은 것.
        시즌이 바뀌어도 카드의 data-end 만 고치면 따라오므로 여기는 손댈 필요가 없다. */
     var seasonEnd = 0;
@@ -793,6 +803,12 @@
       /* 모집이 모두 끝나면 제품 섹션이 '다음 시즌 안내'로 바뀐다(스타일은 CSS). */
       root.dataset.season = (FORCE_SEASON_CLOSED ||
         (!FORCE_OPEN_ALL && seasonEnd && now >= seasonEnd)) ? 'closed' : 'open';
+
+      /* 오픈일이 아직 남았을 때만 날짜를 알린다 */
+      var leadEl = document.getElementById('seasonNextLead');
+      if (leadEl && NEXT_OPEN && now < kst(NEXT_OPEN)) {
+        leadEl.textContent = NEXT_OPEN_TEXT;
+      }
     }
 
     render();

@@ -232,8 +232,10 @@
     <!-- 모집 기간이 아닐 때 폼 대신 보이는 자리. 기간 판정은 <head> 의 스크립트가 한다. -->
     <div class="form-closed">
       <p class="form-closed__lead" id="closedLead">모집이 종료되었습니다.</p>
-      <p class="form-closed__body">엘스파 프리뷰는 LF 스타일 파트너만 신청할 수 있어요.<br>
-        미리 가입해 두시면 다음 시즌에 바로 참여하실 수 있습니다!</p>
+      <!-- 첫 줄은 스크립트의 NEXT_OPEN_TEXT 가 채운다. 오픈일이 지나면 사라진다. -->
+      <p class="form-closed__next" id="closedNext" hidden></p>
+      <p class="form-closed__body">엘스파 프리뷰는 LF 스타일 파트너만 신청할 수 있어요<br>
+        미리 가입해 두시면 오픈 당일 바로 참여할 수 있어요!</p>
       <a class="btn btn--key" id="closedJoin" href="#" target="_blank" rel="noopener">엘스파 가입 신청하기</a>
       <p class="form-closed__home"><a href="index.html">홈으로 돌아가기</a></p>
     </div>
@@ -381,6 +383,11 @@
 
   var LESPA_JOIN_URL = 'https://affiliator.lfmall.co.kr/aff_join/index.html';
 
+  /* 다음 시즌 오픈 안내. index.html 의 NEXT_OPEN · NEXT_OPEN_TEXT 와 같은 값으로 둔다.
+     이 시각이 지나면 문장이 사라져 지난 날짜를 약속하지 않는다. */
+  var NEXT_OPEN      = '2026-11-30T23:59';
+  var NEXT_OPEN_TEXT = '다음 모집은 11월 30일(월)에 열려요!';
+
   function seasonState() {
     function t(v) { return new Date(v + ':00+09:00').getTime(); }
     var now = Date.now();
@@ -396,6 +403,13 @@
     document.getElementById('closedLead').textContent =
       (state === 'soon') ? '아직 모집 시작 전입니다.' : '모집이 종료되었습니다.';
     document.getElementById('closedJoin').href = LESPA_JOIN_URL;
+
+    /* 오픈일이 아직 남았을 때만 날짜를 알린다 */
+    var nextEl = document.getElementById('closedNext');
+    var show = NEXT_OPEN &&
+      Date.now() < new Date(NEXT_OPEN + ':00+09:00').getTime();
+    nextEl.textContent = show ? NEXT_OPEN_TEXT : '';
+    nextEl.hidden = !show;
   }
   applySeasonGate();
   setInterval(applySeasonGate, 30000);
