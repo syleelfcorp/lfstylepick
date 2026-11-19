@@ -1232,3 +1232,15 @@ body.no-scroll { overflow: hidden; }
 
 /* 신청서 엘스파 게이트 — 한글이 단어 중간에서 끊기지 않게 한다. */
 #lespaGate .hint, #lespaGate .gate__note { word-break: keep-all; }
+
+/* ═══ 서비스 소개 — 버튼 두 개 ═════════════════════════════════════
+   PC(760px~)는 왼쪽에 나란히, 모바일은 가운데에 나란히 둔다.
+   화면이 좁아 두 개가 한 줄에 들어가지 않을 때만 아래로 내려간다.
+   끊는 지점을 숫자로 정하지 않고 flex-wrap 에 맡겨, 글자가 바뀌어도
+   알아서 맞는다. flex: 0 0 auto 는 버튼이 찌그러지는 대신 줄을 바꾸게 한다.
+   .intro-col p 가 margin:0 이라 선택자를 한 단 더 구체적으로 둔다. */
+.intro-col p.intro-col__more { display: flex; flex-wrap: wrap; gap: 8px; }
+.intro-col p.intro-col__more > .btn { flex: 0 0 auto; }
+@media (max-width: 759px) {
+  .intro-col p.intro-col__more { justify-content: center; }
+}
