@@ -176,6 +176,7 @@ button { font-family: inherit; }
 .section-lead {
   margin: 14px 0 0; color: var(--muted); font-size: 16px; max-width: 52ch;
   text-wrap: pretty;
+  word-break: keep-all;   /* 한글이 단어 중간에서 끊기지 않게 */
 }
 .section-head { margin-bottom: clamp(28px, 5vw, 44px); }
 /* 한 섹션 안에서 묶음을 나누는 소제목 */
@@ -1244,3 +1245,4 @@ body.no-scroll { overflow: hidden; }
 @media (max-width: 759px) {
   .intro-col p.intro-col__more { justify-content: center; }
 }
+
