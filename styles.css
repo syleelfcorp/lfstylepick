@@ -1246,3 +1246,16 @@ body.no-scroll { overflow: hidden; }
   .intro-col p.intro-col__more { justify-content: center; }
 }
 
+
+/* 마감 안내 — 좁은 화면에서 좌우 여백을 줄여 문장이 한 줄에 들어가게 한다.
+   바깥 .wrap 이 이미 페이지 여백을 주고 있어 여기서는 더 둘 필요가 없다. */
+@media (max-width: 520px) {
+  .form-closed { padding-inline: 0; }
+}
+
+/* 더 좁은 화면에서 줄이 넘칠 때 마지막 줄이 허전해지지 않게 한다.
+   홈과 신청서의 마감 안내 문구에 함께 적용한다. */
+.form-closed__body, .season-next__body { text-wrap: pretty; }
+
+/* 묶어서 한 줄에 두고 싶은 조각. 줄바꿈이 이 안에서는 일어나지 않는다. */
+.nowrap { white-space: nowrap; }
