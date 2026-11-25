@@ -1179,6 +1179,8 @@ body.no-scroll { overflow: hidden; }
 :root[data-season="closed"] .season-next { display: block; }
 .season-next__lead {
   margin: 0 0 10px; font-size: 18px; font-weight: 700; color: var(--ink);
+  word-break: keep-all;   /* 오픈일 문구가 길어져도 단어 중간에서 끊기지 않게 */
+  text-wrap: pretty;      /* 마지막 줄에 한 단어만 남지 않게. balance 는 '30일 / (월)' 로 끊어 쓰지 않는다 */
 }
 /* 두 문장을 <br> 로 나눈다. 문장 경계라 임의의 줄바꿈이 아니고,
    좁은 화면에서는 각 문장이 keep-all 로 자연스럽게 다시 접힌다. */
